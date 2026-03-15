@@ -12,7 +12,7 @@ async def analyze_resume(
     pdf_bytes = await resume.read()
     pdf = fitz.open(stream=pdf_bytes, filetype="pdf")
 
-    text = ""
+    resume_text = ""
 
     for page in pdf:
         resume_text += page.get_text()
@@ -24,6 +24,7 @@ async def analyze_resume(
 
     return {
         "message": "Resume processed successfully",
+        "score": score,
         "resume_skills": resume_skills,
         "job_skills": job_skills,
         "matched_skills": matched,
